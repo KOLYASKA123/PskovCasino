@@ -1,14 +1,75 @@
-﻿<Page x:Class="PskovCasino.MVVM.View.LoginView"
+﻿<UserControl x:Class="PskovCasino.MVVM.View.LoginView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PskovCasino.MVVM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="LoginView">
+      d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
-        
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <StackPanel>
+            <Label HorizontalAlignment="Center">
+                Username
+            </Label>
+            <TextBox 
+                Margin="10" 
+                HorizontalAlignment="Center" 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Width="120" 
+                >
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label HorizontalAlignment="Center">
+                Password
+            </Label>
+            <PasswordBox 
+                Margin="10" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="120" 
+                >
+                <PasswordBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </PasswordBox.Resources>
+            </PasswordBox>
+            <Button 
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalContentAlignment="Center"
+                Content="I don`t have an account :("
+                Command="{Binding NavigateRegistrationCommand}"
+            />
+            <Button 
+                Margin="10"
+                Content="Login" 
+                HorizontalAlignment="Center" 
+                VerticalContentAlignment="Center" 
+                Height="30" 
+                Width="86" 
+                Cursor="Hand"
+                >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
     </Grid>
-</Page>
+</UserControl>

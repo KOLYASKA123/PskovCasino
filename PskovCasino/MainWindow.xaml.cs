@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PskovCasino
+
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

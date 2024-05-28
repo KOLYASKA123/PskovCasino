@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PskovCasino.MVVM.ViewModel
 {
-    class HomeViewModel
+    class HomeViewModel : Core.ViewModel
     {
 
     }

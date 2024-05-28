@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PskovCasino.Core
 {
-    class ViewModel
+    public abstract class ViewModel : ObservableObject
     {
 
     }

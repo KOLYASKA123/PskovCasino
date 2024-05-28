@@ -18,7 +18,7 @@ namespace PskovCasino.MVVM.View
     /// <summary>
     /// Логика взаимодействия для RegistrationView.xaml
     /// </summary>
-    public partial class RegistrationView : Page
+    public partial class RegistrationView : UserControl
     {
         public RegistrationView()
         {
