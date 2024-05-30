@@ -12,6 +12,6 @@ namespace PskovCasino.MVVM.Model
         public int ID { get; set; }
         public string Username { get; set; }
         public ClientStatus ClientStatusID { get; set; }
-        public SqlMoney Balance { get; set; }
+        public decimal Balance { get; set; }
     }
 }

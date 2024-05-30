@@ -11,8 +11,7 @@ namespace PskovCasino.MVVM.Model
     {
         public Clients ClientID { get; set; }
         public GameSessions GameSessionID { get; set; }
-        public SqlMoney InitialPayment { get; set; }
-        public SqlMoney WinPayment { get; set; }
-
+        public decimal InitialPayment { get; set; }
+        public decimal WinPayment { get; set; }
     }
 }

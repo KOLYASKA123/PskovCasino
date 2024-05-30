@@ -5,6 +5,8 @@ using System.Data;
 using System.Windows;
 using PskovCasino.Core;
 using PskovCasino.Services;
+using Microsoft.EntityFrameworkCore;
+using PskovCasino.MVVM.Model;
 
 namespace PskovCasino
 {
@@ -37,6 +39,10 @@ namespace PskovCasino
         protected override void OnStartup(StartupEventArgs e)
         {
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            var options = new DbContextOptionsBuilder<CasinoContext>().UseSqlServer("Filename=./MVVM/Model/db.mdf").Options;
+            using var db = new CasinoContext(options);
+
+            db.Database.EnsureCreated();
             
             mainWindow.Show();
             base.OnStartup(e);
