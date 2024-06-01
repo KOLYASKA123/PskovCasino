@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PskovCasino.MVVM.Model
 {
+    [Keyless]
     public class GameParticipants
     {
         public Clients ClientID { get; set; }

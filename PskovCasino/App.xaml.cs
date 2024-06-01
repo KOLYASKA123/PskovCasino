@@ -39,7 +39,7 @@ namespace PskovCasino
         protected override void OnStartup(StartupEventArgs e)
         {
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            var options = new DbContextOptionsBuilder<CasinoContext>().UseSqlServer("Filename=./MVVM/Model/db.mdf").Options;
+            var options = new DbContextOptionsBuilder<CasinoContext>().UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=db;Trusted_Connection=True;").Options;
             using var db = new CasinoContext(options);
 
             db.Database.EnsureCreated();
