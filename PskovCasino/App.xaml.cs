@@ -27,7 +27,13 @@ namespace PskovCasino
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<RegistrationViewModel>();
             services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<HomeViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddDbContext<CasinoContext>(options =>
+            {
+                //options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=db;Trusted_Connection=True;");
+                options.UseSqlite("Filename=../../../MyLocalLibrary.db");
+            });
 
             services.AddSingleton<Func<Type, ViewModel>>(
                 serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType)
@@ -38,12 +44,20 @@ namespace PskovCasino
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<CasinoContext>();
+                db.Database.EnsureCreated();
+            }
+
+
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            var options = new DbContextOptionsBuilder<CasinoContext>().UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=db;Trusted_Connection=True;").Options;
+
+            /*var options = new DbContextOptionsBuilder<CasinoContext>().Use("Filename=./MVVM/Model/DB.db").Options;
             using var db = new CasinoContext(options);
 
-            db.Database.EnsureCreated();
-            
+            db.Database.EnsureCreated();*/
+
             mainWindow.Show();
             base.OnStartup(e);
         }

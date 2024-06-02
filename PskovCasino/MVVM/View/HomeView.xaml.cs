@@ -18,7 +18,7 @@ namespace PskovCasino.MVVM.View
     /// <summary>
     /// Логика взаимодействия для HomeView.xaml
     /// </summary>
-    public partial class HomeView : Page
+    public partial class HomeView : UserControl
     {
         public HomeView()
         {

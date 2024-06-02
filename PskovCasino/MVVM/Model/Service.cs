@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace PskovCasino.MVVM.Model
 {
-    public class Clients
+    public class Service
     {
         public int ID { get; set; }
-        public string Username { get; set; }
-        public ClientStatus ClientStatusID { get; set; }
-        public decimal Balance { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
     }
 }

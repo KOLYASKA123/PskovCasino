@@ -14,13 +14,13 @@ namespace PskovCasino.MVVM.Model
 
         }
 
-        public DbSet<Clients> Clients { get; set; }
-        public DbSet<ClientStatus> ClientStatus { get; set; }
-        public DbSet<ClientStatusServices> ClientStatusServices { get; set; }
-        public DbSet<GameParticipants> GameParticipants { get; set; }
-        public DbSet<GameSessions> GameSessions { get; set; }
-        public DbSet<GameTypes> GameTypes { get; set; }
-        public DbSet<Services> Services { get; set; }
-        public DbSet<Tournaments> Tournaments { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<ClientStatus> ClientStatuses { get; set; }
+        public DbSet<ClientStatusService> ClientStatusServices { get; set; }
+        public DbSet<GameParticipant> GameParticipants { get; set; }
+        public DbSet<GameSession> GameSessions { get; set; }
+        public DbSet<GameType> GameTypes { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Tournament> Tournaments { get; set; }
     }
 }

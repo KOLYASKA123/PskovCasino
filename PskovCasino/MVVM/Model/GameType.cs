@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace PskovCasino.MVVM.Model
 {
-    public class GameSessions
+    public class GameType
     {
         public int ID { get; set; }
-        public GameTypes GameTypeID { get; set; }
-        public int MimimalParticipantsCountToStart { get; set; }
+        public string Name { get; set; }
     }
 }

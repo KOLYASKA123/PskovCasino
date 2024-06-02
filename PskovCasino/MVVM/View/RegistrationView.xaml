@@ -13,29 +13,32 @@
                 Username
             </Label>
             <TextBox 
-            Margin="10" 
-            HorizontalAlignment="Center" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="120" 
+                Margin="10" 
+                HorizontalAlignment="Center" 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Width="120"
+                Text="{Binding Username}"
             />
             <Label HorizontalAlignment="Center">
                 Password
             </Label>
-            <PasswordBox 
-            Margin="10" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            Width="120" 
+            <TextBox 
+                Margin="10" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="120"
+                Text="{Binding Password}"
             />
             <Label HorizontalAlignment="Center">
                 Confirm password
             </Label>
-            <PasswordBox 
-            Margin="10" 
-            HorizontalAlignment="Center"  
-            VerticalAlignment="Top" 
-            Width="120" 
+            <TextBox 
+                Margin="10" 
+                HorizontalAlignment="Center"  
+                VerticalAlignment="Top" 
+                Width="120"
+                Text="{Binding RetypePassword}"
             />
             <Button 
                 Background="Transparent" 
@@ -45,9 +48,14 @@
                 Command="{Binding NavigateLoginCommand}"
                 />
             <Button 
-            Margin="10"
-            Content="Register" 
-            HorizontalAlignment="Center" VerticalContentAlignment="Center" Height="30" Width="86" Cursor="Hand"
+                Margin="10"
+                Content="Register" 
+                HorizontalAlignment="Center" 
+                VerticalContentAlignment="Center" 
+                Height="30" 
+                Width="86" 
+                Cursor="Hand"
+                Command="{Binding RegisterCommand}"
             >
                 <Button.RenderTransform>
                     <TransformGroup>
