@@ -48,14 +48,25 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        private Client _me;
+        public Client Me
+        {
+            get => _me;
+            set
+            {
+                _me = value;
+                OnPropertyChanged(nameof(Me));
+            }
+        }
+
         public RelayCommand NavigateRegistrationCommand { get; set; }
 
         public RelayCommand LoginCommand { get; set; }
 
         private void Login()
         {
-            var client = _db.Clients.SingleOrDefault(c => c.Username == Username);
-            if (client != null && BCrypt.Net.BCrypt.Verify(Password, client.Password))
+            Me = _db.Clients.SingleOrDefault(c => c.Username == Username);
+            if (Me != null && BCrypt.Net.BCrypt.Verify(Password, Me.Password))
             {
                 Navigation.NavigateTo<HomeViewModel>();
             }

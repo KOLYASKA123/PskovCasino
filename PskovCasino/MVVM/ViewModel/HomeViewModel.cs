@@ -37,8 +37,9 @@ namespace PskovCasino.MVVM.ViewModel
         public RelayCommand NavigateProfileCommand { get; set; }
         public RelayCommand NavigateGameSessionsCommand { get; set; }
 
-        public HomeViewModel(INavigationService navService)
+        public HomeViewModel(INavigationService navService, RegistrationViewModel registrationViewModel, LoginViewModel loginViewModel)
         {
+            Me = registrationViewModel.Me is null ? loginViewModel.Me : registrationViewModel.Me;
             Navigation = navService;
             NavigateProfileCommand = new RelayCommand(execute => Navigation.HomeNavigateTo<ProfileViewModel>(), canExecute => true);
             NavigateGameSessionsCommand = new RelayCommand(execute => Navigation.HomeNavigateTo<GameSessionsViewModel>(), canExecute => true);

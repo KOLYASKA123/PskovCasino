@@ -60,6 +60,17 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        private Client _me;
+        public Client Me
+        {
+            get => _me;
+            set
+            {
+                _me = value;
+                OnPropertyChanged(nameof(Me));
+            }
+        }
+
         public RelayCommand NavigateLoginCommand { get; set; }
         public RelayCommand RegisterCommand { get; set; }
 
@@ -67,14 +78,14 @@ namespace PskovCasino.MVVM.ViewModel
         {
             if (Password == RetypePassword)
             {
-                Client client = new()
+                Me = new()
                 {
                     Username = Username,
                     Password = BCrypt.Net.BCrypt.HashPassword(Password),
                     Balance = 0,
                     ClientStatusID = 1
                 };
-                _db.Clients.Add(client);
+                _db.Clients.Add(Me);
                 _db.SaveChanges();
                 Navigation.NavigateTo<HomeViewModel>();
             }
