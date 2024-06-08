@@ -1,4 +1,5 @@
-﻿using PskovCasino.Core;
+﻿using Microsoft.EntityFrameworkCore;
+using PskovCasino.Core;
 using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
 using System;
@@ -6,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BCrypt.Net;
+
 
 namespace PskovCasino.MVVM.ViewModel
 {
@@ -64,10 +67,10 @@ namespace PskovCasino.MVVM.ViewModel
         {
             if (Password == RetypePassword)
             {
-                Client client = new Client
+                Client client = new()
                 {
-                    Username = this.Username,
-                    Password = this.Password,
+                    Username = Username,
+                    Password = BCrypt.Net.BCrypt.HashPassword(Password),
                     Balance = 0,
                     ClientStatusID = 1
                 };

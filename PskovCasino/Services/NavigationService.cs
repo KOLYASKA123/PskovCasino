@@ -11,12 +11,14 @@ namespace PskovCasino.Services
     {
         ViewModel CurrentView { get; }
         void NavigateTo<T>() where T : ViewModel;
+        void HomeNavigateTo<T>() where T : ViewModel;
     }
 
     public class NavigationService : ObservableObject, INavigationService
     {
         private readonly Func<Type, ViewModel> _viewModelFactory;
         private ViewModel _currentView;
+        private ViewModel _homeCurrentView;
 
         public ViewModel CurrentView
         {
@@ -24,7 +26,17 @@ namespace PskovCasino.Services
             private set
             {
                 _currentView = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentView));
+            }
+        }
+
+        public ViewModel HomeCurrentView
+        {
+            get => _homeCurrentView;
+            private set
+            {
+                _homeCurrentView = value;
+                OnPropertyChanged(nameof(HomeCurrentView));
             }
         }
 
@@ -38,6 +50,12 @@ namespace PskovCasino.Services
         {
             ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             CurrentView = viewModel;
+        }
+
+        public void HomeNavigateTo<TViewModel>() where TViewModel : ViewModel
+        {
+            ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+            HomeCurrentView = viewModel;
         }
     }
 }

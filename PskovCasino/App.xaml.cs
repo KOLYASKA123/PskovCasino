@@ -28,6 +28,8 @@ namespace PskovCasino
             services.AddSingleton<RegistrationViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<ProfileViewModel>();
+            services.AddSingleton<GameSessionsViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddDbContext<CasinoContext>(options =>
             {

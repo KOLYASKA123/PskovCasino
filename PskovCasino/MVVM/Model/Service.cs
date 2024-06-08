@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PskovCasino.MVVM.Model
+﻿namespace PskovCasino.MVVM.Model
 {
     public class Service
     {

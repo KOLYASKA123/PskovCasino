@@ -1,17 +1,17 @@
-﻿using PskovCasino.Core;
+﻿using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PskovCasino.MVVM.Model;
 
 namespace PskovCasino.MVVM.ViewModel
 {
-    public class HomeViewModel : Core.ViewModel
+    public class GameSessionsViewModel : Core.ViewModel
     {
         private INavigationService _navigation;
+        private readonly CasinoContext _db;
 
         public INavigationService Navigation
         {
@@ -30,18 +30,15 @@ namespace PskovCasino.MVVM.ViewModel
             set
             {
                 _me = value;
-                OnPropertyChanged(nameof(Me));
+                OnPropertyChanged(nameof(Client));
             }
         }
 
-        public RelayCommand NavigateProfileCommand { get; set; }
-        public RelayCommand NavigateGameSessionsCommand { get; set; }
-
-        public HomeViewModel(INavigationService navService)
+        public GameSessionsViewModel(INavigationService navService, CasinoContext casinoDbContext, HomeViewModel homeViewModel)
         {
-            Navigation = navService;
-            NavigateProfileCommand = new RelayCommand(execute => Navigation.HomeNavigateTo<ProfileViewModel>(), canExecute => true);
-            NavigateGameSessionsCommand = new RelayCommand(execute => Navigation.HomeNavigateTo<GameSessionsViewModel>(), canExecute => true);
+            _navigation = navService;
+            _db = casinoDbContext;
+            Me = homeViewModel.Me;
         }
     }
 }

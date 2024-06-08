@@ -18,6 +18,7 @@
                 TextWrapping="Wrap" 
                 VerticalAlignment="Top" 
                 Width="120" 
+                Text="{Binding Username}"
                 >
                 <TextBox.Resources>
                     <Style TargetType="Border">
@@ -28,18 +29,19 @@
             <Label HorizontalAlignment="Center">
                 Password
             </Label>
-            <PasswordBox 
+            <TextBox 
                 Margin="10" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
-                Width="120" 
+                Width="120"
+                Text="{Binding Password}"
                 >
-                <PasswordBox.Resources>
+                <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"/>
                     </Style>
-                </PasswordBox.Resources>
-            </PasswordBox>
+                </TextBox.Resources>
+            </TextBox>
             <Button 
                 Background="Transparent"
                 BorderBrush="Transparent"
@@ -55,6 +57,7 @@
                 Height="30" 
                 Width="86" 
                 Cursor="Hand"
+                Command="{Binding LoginCommand}"
                 >
                 <Button.RenderTransform>
                     <TransformGroup>

@@ -19,7 +19,13 @@
                 VerticalAlignment="Top" 
                 Width="120"
                 Text="{Binding Username}"
-            />
+            >
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
             <Label HorizontalAlignment="Center">
                 Password
             </Label>
@@ -29,7 +35,13 @@
                 VerticalAlignment="Center" 
                 Width="120"
                 Text="{Binding Password}"
-            />
+            >
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
             <Label HorizontalAlignment="Center">
                 Confirm password
             </Label>
@@ -39,7 +51,13 @@
                 VerticalAlignment="Top" 
                 Width="120"
                 Text="{Binding RetypePassword}"
-            />
+            >
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
             <Button 
                 Background="Transparent" 
                 BorderBrush="Transparent" 

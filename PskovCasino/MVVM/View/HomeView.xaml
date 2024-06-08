@@ -8,6 +8,22 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0"  Orientation="Vertical">
+            <Button 
+                Content="Мой профиль"
+                Command="{Binding NavigateProfileCommand}"
+                />
+            <Button 
+                Content="Игровые сессии"
+                Command="{Binding NavigateGameSessionsCommand}"
+                />
+        </StackPanel>
+        <ContentControl Grid.Column="1" Content="{Binding Navigation.HomeCurrentView}">
+
+        </ContentControl>
     </Grid>
 </UserControl>

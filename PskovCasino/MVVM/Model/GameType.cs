@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PskovCasino.MVVM.Model
+﻿namespace PskovCasino.MVVM.Model
 {
     public class GameType
     {
