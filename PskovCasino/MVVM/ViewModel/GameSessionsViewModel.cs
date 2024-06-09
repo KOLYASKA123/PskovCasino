@@ -1,4 +1,5 @@
-﻿using PskovCasino.MVVM.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
 using System;
 using System.Collections.Generic;
@@ -73,7 +74,13 @@ namespace PskovCasino.MVVM.ViewModel
             _navigation = navService;
             _db = casinoDbContext;
             Me = homeViewModel.Me;
-            GameSessions = new ObservableCollection<GameSession>([.. _db.GameSessions]);
+            GameSessions = new ObservableCollection<GameSession>(
+                _db.GameSessions.FromSql(
+                    $"""
+                    SELECT gs.ID, gs.MimimalParticipantsCountToStart, gt.ID AS GameTypeID, gt.Name AS GameTypeName
+                    FROM GameSessions gs
+                    JOIN GameTypes gt ON gt.ID = gs.GameTypeID
+                    """).Include(gs => gs.GameType).ToList());
             GameSessions.CollectionChanged += GameSessions_CollectionChanged;
         }
     }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BCrypt.Net;
 using Microsoft.VisualBasic.Logging;
 using PskovCasino.MVVM.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace PskovCasino.MVVM.ViewModel
 {
@@ -65,7 +66,7 @@ namespace PskovCasino.MVVM.ViewModel
 
         private void Login()
         {
-            Me = _db.Clients.SingleOrDefault(c => c.Username == Username);
+            Me = _db.Clients.Include(c => c.ClientStatus).SingleOrDefault(c => c.Username == Username);
             if (Me != null && BCrypt.Net.BCrypt.Verify(Password, Me.Password))
             {
                 Navigation.NavigateTo<HomeViewModel>();

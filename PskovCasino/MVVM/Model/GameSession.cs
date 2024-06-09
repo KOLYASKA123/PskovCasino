@@ -6,8 +6,8 @@ namespace PskovCasino.MVVM.Model
     {
         public int ID { get; set; }
 
-        [ForeignKey("GameType")]
         public int GameTypeID { get; set; }
+        public GameType GameType { get; set; }
 
         public int MimimalParticipantsCountToStart { get; set; }
     }

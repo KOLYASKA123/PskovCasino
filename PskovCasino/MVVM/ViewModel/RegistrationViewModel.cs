@@ -87,6 +87,7 @@ namespace PskovCasino.MVVM.ViewModel
                 };
                 _db.Clients.Add(Me);
                 _db.SaveChanges();
+                Me = _db.Clients.Include(c => c.ClientStatus).SingleOrDefault(c => c.Username == Username);
                 Navigation.NavigateTo<HomeViewModel>();
             }
         }

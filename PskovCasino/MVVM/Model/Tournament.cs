@@ -6,8 +6,8 @@ namespace PskovCasino.MVVM.Model
     {
         public int ID { get; set; }
 
-        [ForeignKey("GameSession")]
         public int GameSessionID { get; set; }
+        public GameSession GameSession { get; set; }
 
         public decimal MainPrize { get; set; }
     }

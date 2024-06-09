@@ -6,11 +6,11 @@ namespace PskovCasino.MVVM.Model
     [Keyless]
     public class GameParticipant
     {
-        [ForeignKey("Client")]
         public int ClientID { get; set; }
+        public Client Client { get; set; }
 
-        [ForeignKey("GameSession")]
         public int GameSessionID { get; set; }
+        public GameSession GameSession { get; set; }
 
         public decimal InitialPayment { get; set; }
 
