@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PskovCasino.Core;
 using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
 using System;
@@ -69,11 +70,28 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        public RelayCommand ConnectCommand { get; set; }
+
+        
+        /// <summary>
+        /// Позволяет подключиться к игровой сессии по ID.
+        /// </summary>
+        /// <param name="id">ID игровой сессии</param>
+        private void Connect(object id)
+        {
+            var ID = (int)id;
+        }
+
+        public RelayCommand DisconnectCommand { get; set; }
+
+        
+
         public GameSessionsViewModel(INavigationService navService, CasinoContext casinoDbContext, HomeViewModel homeViewModel)
         {
             _navigation = navService;
             _db = casinoDbContext;
             Me = homeViewModel.Me;
+            
             GameSessions = new ObservableCollection<GameSession>(
                 _db.GameSessions.FromSql(
                     $"""
@@ -82,6 +100,7 @@ namespace PskovCasino.MVVM.ViewModel
                     JOIN GameTypes gt ON gt.ID = gs.GameTypeID
                     """).Include(gs => gs.GameType).ToList());
             GameSessions.CollectionChanged += GameSessions_CollectionChanged;
+            ConnectCommand = new RelayCommand(Connect, canExecute => true);
         }
     }
 }
