@@ -10,5 +10,8 @@ namespace PskovCasino.MVVM.Model
         public GameType GameType { get; set; }
 
         public int MimimalParticipantsCountToStart { get; set; }
+
+        [NotMapped]
+        public ICollection<GameParticipant> GameParticipants { get; set; }
     }
 }

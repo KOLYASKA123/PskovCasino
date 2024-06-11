@@ -29,6 +29,8 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <EventSetter Event="MouseEnter" Handler="ListViewItem_MouseEnter"/>
+                    <EventSetter Event="MouseLeave" Handler="ListViewItem_MouseLeave"/>
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
@@ -48,8 +50,10 @@
                         <Button
                             Grid.Column="4" 
                             Content="Присоединиться"
+                            IsEnabled="False"
                             Command="{Binding DataContext.ConnectCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                            CommandParameter="{Binding ID}" Click="Button_Click"
+                            CommandParameter="{Binding ID}" 
+                            Click="Button_Click"
                             />
                     </Grid>
                 </DataTemplate>

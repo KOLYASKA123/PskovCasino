@@ -71,19 +71,38 @@ namespace PskovCasino.MVVM.ViewModel
         }
 
         public RelayCommand ConnectCommand { get; set; }
-
-        
         /// <summary>
-        /// Позволяет подключиться к игровой сессии по ID.
+        /// Позволяет присоединиться к игровой сессии по ID.
         /// </summary>
         /// <param name="id">ID игровой сессии</param>
         private void Connect(object id)
         {
             var ID = (int)id;
+            _db.Database.ExecuteSql(
+                $"""
+                INSERT INTO GameParticipants (ClientID, GameSessionID, InitialPayment, WinPayment)
+                VALUES ({Me.ID}, {ID}, 0, 0)
+                """
+                );
+            _db.SaveChanges();
         }
 
         public RelayCommand DisconnectCommand { get; set; }
-
+        /// <summary>
+        /// Позволяет покинуть игровую сессию по ID.
+        /// </summary>
+        /// <param name="id">ID игровой сессии</param>
+        private void Disconnect(object id)
+        {
+            var ID = (int)id;
+            _db.Database.ExecuteSql(
+                $"""
+                DELETE FROM GameParticipants
+                WHERE GameSessionID = {ID} AND ClientID = {Me.ID}
+                """
+                );
+            _db.SaveChanges();
+        }
         
 
         public GameSessionsViewModel(INavigationService navService, CasinoContext casinoDbContext, HomeViewModel homeViewModel)
@@ -98,9 +117,23 @@ namespace PskovCasino.MVVM.ViewModel
                     SELECT gs.ID, gs.MimimalParticipantsCountToStart, gt.ID AS GameTypeID, gt.Name AS GameTypeName
                     FROM GameSessions gs
                     JOIN GameTypes gt ON gt.ID = gs.GameTypeID
-                    """).Include(gs => gs.GameType).ToList());
+                    """)
+                .Include(gs => gs.GameType)
+                .ToList());
+            foreach (GameSession gameSession in GameSessions)
+            {
+                gameSession.GameParticipants = new ObservableCollection<GameParticipant>(
+                    _db.GameParticipants.FromSql(
+                        $"""
+                        SELECT * FROM GameParticipants
+                        WHERE GameSessionID = {gameSession.ID}
+                        """
+                        )
+                    .Include(gp => gp.Client).ToList());
+            }
             GameSessions.CollectionChanged += GameSessions_CollectionChanged;
             ConnectCommand = new RelayCommand(Connect, canExecute => true);
+            DisconnectCommand = new RelayCommand(Disconnect, canExecute => true);
         }
     }
 }
