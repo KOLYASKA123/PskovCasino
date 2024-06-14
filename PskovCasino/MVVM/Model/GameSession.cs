@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.ObjectModel;
+using PskovCasino.MVVM.ViewModel;
 
 namespace PskovCasino.MVVM.Model
 {
@@ -12,6 +14,6 @@ namespace PskovCasino.MVVM.Model
         public int MimimalParticipantsCountToStart { get; set; }
 
         [NotMapped]
-        public ICollection<GameParticipant> GameParticipants { get; set; }
+        public ObservableCollection<GameParticipant> GameParticipants { get; set; }
     }
 }

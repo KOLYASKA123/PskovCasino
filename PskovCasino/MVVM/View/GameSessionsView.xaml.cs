@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PskovCasino.MVVM.Model;
 using PskovCasino.MVVM.ViewModel;
 
 namespace PskovCasino.MVVM.View
@@ -26,23 +27,22 @@ namespace PskovCasino.MVVM.View
             InitializeComponent();
         }
 
-        private Button? _pressedConnectionButton;
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button)
             {
-                if (_pressedConnectionButton == null)
+                if (listView.SelectedIndex != -1 && listView.IsEnabled)
                 {
                     button.Content = "Покинуть игру";
-                    _pressedConnectionButton = button;
+                    ((GameSessionsViewModel)DataContext).CurrentGameSessionID = listView.SelectedIndex + 1;
+                    listView.IsEnabled = false;
                     button.Command = ((GameSessionsViewModel)DataContext).ConnectCommand;
 
                 }
                 else
                 {
                     button.Content = "Присоединиться";
-                    _pressedConnectionButton = null;
+                    listView.IsEnabled = true;
                     button.Command = ((GameSessionsViewModel)DataContext).DisconnectCommand;
                 }
             }
@@ -69,28 +69,30 @@ namespace PskovCasino.MVVM.View
             return null;
         }
 
-        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender is ListViewItem listViewItem)
+            if (listView.SelectedIndex == -1)
             {
-                Button button = FindVisualChild<Button>(listViewItem);
-                if (_pressedConnectionButton != null && _pressedConnectionButton == button)
-                {
-                    button.IsEnabled = true; 
-                }
-                else if (_pressedConnectionButton == null)
-                {
-                    button.IsEnabled = true;
-                }
+                connectionButton.IsEnabled = false;
             }
+            else connectionButton.IsEnabled = true;
         }
 
-        private void ListViewItem_MouseLeave(object sender, MouseEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (sender is ListViewItem listViewItem)
+            listView.SelectedIndex = ((GameSessionsViewModel)DataContext).CurrentGameSessionID - 1;
+            if (listView.SelectedIndex != -1)
             {
-                Button button = FindVisualChild<Button>(listViewItem);
-                button.IsEnabled = false;
+                listView.IsEnabled = false;
+                connectionButton.Content = "Покинуть игру";
+                connectionButton.Command = ((GameSessionsViewModel)DataContext).ConnectCommand;
+            }
+            else
+            {
+                listView.IsEnabled = true;
+                connectionButton.Content = "Присоединиться";
+                connectionButton.Command = ((GameSessionsViewModel)DataContext).DisconnectCommand;
+                connectionButton.IsEnabled = false;
             }
         }
     }

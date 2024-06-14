@@ -2,13 +2,10 @@
 using PskovCasino.Core;
 using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace PskovCasino.MVVM.ViewModel
 {
@@ -50,6 +47,17 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        private int _currentGameSessionID;
+        public int CurrentGameSessionID
+        {
+            get => _currentGameSessionID;
+            set
+            {
+                _currentGameSessionID = value;
+                OnPropertyChanged(nameof(CurrentGameSessionID));
+            }
+        }
+
         private void GameSessions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             // Обработка изменений в коллекции
@@ -70,6 +78,11 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        private void GameParticipants_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+
+        }
+
         public RelayCommand ConnectCommand { get; set; }
         /// <summary>
         /// Позволяет присоединиться к игровой сессии по ID.
@@ -78,6 +91,7 @@ namespace PskovCasino.MVVM.ViewModel
         private void Connect(object id)
         {
             var ID = (int)id;
+            CurrentGameSessionID = ID;
             _db.Database.ExecuteSql(
                 $"""
                 INSERT INTO GameParticipants (ClientID, GameSessionID, InitialPayment, WinPayment)
@@ -95,6 +109,7 @@ namespace PskovCasino.MVVM.ViewModel
         private void Disconnect(object id)
         {
             var ID = (int)id;
+            CurrentGameSessionID = 0;
             _db.Database.ExecuteSql(
                 $"""
                 DELETE FROM GameParticipants
@@ -120,6 +135,9 @@ namespace PskovCasino.MVVM.ViewModel
                     """)
                 .Include(gs => gs.GameType)
                 .ToList());
+
+            CurrentGameSessionID = 0;
+
             foreach (GameSession gameSession in GameSessions)
             {
                 gameSession.GameParticipants = new ObservableCollection<GameParticipant>(
@@ -130,6 +148,11 @@ namespace PskovCasino.MVVM.ViewModel
                         """
                         )
                     .Include(gp => gp.Client).ToList());
+                gameSession.GameParticipants.CollectionChanged += GameParticipants_CollectionChanged;
+                if (gameSession.GameParticipants.Any(gm => gm.ClientID == Me.ID))
+                {
+                    CurrentGameSessionID = gameSession.ID;
+                }
             }
             GameSessions.CollectionChanged += GameSessions_CollectionChanged;
             ConnectCommand = new RelayCommand(Connect, canExecute => true);

@@ -7,6 +7,7 @@ using PskovCasino.Core;
 using PskovCasino.Services;
 using Microsoft.EntityFrameworkCore;
 using PskovCasino.MVVM.Model;
+using PskovCasino.MVVM.View;
 
 namespace PskovCasino
 {
@@ -20,16 +21,43 @@ namespace PskovCasino
         public App()
         {
             IServiceCollection services = new ServiceCollection();
+            
             services.AddSingleton(provider => new MainWindow
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
             services.AddSingleton<MainViewModel>();
+            
+            services.AddSingleton(provider => new RegistrationView()
+            {
+                DataContext = provider.GetRequiredService<RegistrationViewModel>()
+            });
             services.AddSingleton<RegistrationViewModel>();
+
+            services.AddSingleton(provider => new LoginView
+            {
+                DataContext = provider.GetRequiredService<LoginViewModel>()
+            });
             services.AddSingleton<LoginViewModel>();
+
+            services.AddSingleton(provider => new HomeView
+            {
+                DataContext = provider.GetRequiredService<HomeViewModel>()
+            });
             services.AddSingleton<HomeViewModel>();
+
+            services.AddSingleton(provider => new ProfileView
+            {
+                DataContext = provider.GetRequiredService<ProfileViewModel>()
+            });
             services.AddSingleton<ProfileViewModel>();
+
+            services.AddSingleton(provider => new GameSessionsView
+            {
+                DataContext = provider.GetRequiredService<GameSessionsViewModel>()
+            });
             services.AddSingleton<GameSessionsViewModel>();
+
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddDbContext<CasinoContext>(options =>
             {
