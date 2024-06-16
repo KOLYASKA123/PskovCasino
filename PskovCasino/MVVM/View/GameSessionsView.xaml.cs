@@ -95,5 +95,30 @@ namespace PskovCasino.MVVM.View
                 connectionButton.IsEnabled = false;
             }
         }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+
+            if (textBox.Text.Length == 0)
+            {
+                if (e.Text[0] >= '1' && e.Text[0] <= '9')
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (((e.Text[0] >= '0' && e.Text[0] <= '9') || e.Text == "\b") && textBox.Text.Length < 4)
+                {
+                    return;
+                }
+                else if (textBox.Text.Length == 4 && e.Text == "\b")
+                {
+                    return;
+                }
+            }
+            e.Handled = true;
+        }
     }
 }

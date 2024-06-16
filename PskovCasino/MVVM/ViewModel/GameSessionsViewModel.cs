@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using PskovCasino.Core;
 using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
@@ -25,7 +27,6 @@ namespace PskovCasino.MVVM.ViewModel
         }
 
         private ObservableCollection<GameSession> _gameSessions;
-
         public ObservableCollection<GameSession> GameSessions
         {
             get => _gameSessions;
@@ -34,6 +35,12 @@ namespace PskovCasino.MVVM.ViewModel
                 _gameSessions = value;
                 OnPropertyChanged(nameof(GameSessions));
             }
+        }
+
+        private List<GameType> _gameTypes;
+        public List<GameType> GameTypes
+        {
+            get => _gameTypes;
         }
 
         private Client _me;
@@ -55,6 +62,39 @@ namespace PskovCasino.MVVM.ViewModel
             {
                 _currentGameSessionID = value;
                 OnPropertyChanged(nameof(CurrentGameSessionID));
+            }
+        }
+
+        private string _filterID;
+        public string FilterID
+        {
+            get => _filterID;
+            set
+            {
+                _filterID = value;
+                OnPropertyChanged(nameof(FilterID));
+            }
+        }
+
+        private int _filterGameType;
+        public int FilterGameType
+        {
+            get => _filterGameType;
+            set
+            {
+                _filterGameType = value;
+                OnPropertyChanged(nameof(FilterGameType));
+            }
+        }
+
+        private string _filterMinimalParticipantsCountToStart;
+        public string FilterMinimalParticipantsCountToStart
+        {
+            get => _filterMinimalParticipantsCountToStart;
+            set
+            {
+                _filterMinimalParticipantsCountToStart = value;
+                OnPropertyChanged(nameof(FilterMinimalParticipantsCountToStart));
             }
         }
 
@@ -118,20 +158,73 @@ namespace PskovCasino.MVVM.ViewModel
                 );
             _db.SaveChanges();
         }
-        
+
+        public RelayCommand FilterCommand { get; set; }
+        private void Filter()
+        {
+            var filters = new List<string>();
+            var parameters = new List<object>();
+
+            if (!string.IsNullOrEmpty(FilterID))
+            {
+                filters.Add("ID = @p0");
+                parameters.Add(new SqliteParameter("@p0", FilterID));
+            }
+            if (FilterGameType != 5)
+            {
+                filters.Add("GameTypeID = @p1");
+                parameters.Add(new SqliteParameter("@p1", FilterGameType + 1));
+            }
+            if (!string.IsNullOrEmpty(FilterMinimalParticipantsCountToStart))
+            {
+                filters.Add("MimimalParticipantsCountToStart = @p2");
+                parameters.Add(new SqliteParameter("@p2", FilterMinimalParticipantsCountToStart));
+            }
+
+            string query;
+            if (filters.Count > 0)
+            {
+                string condition = string.Join(" AND ", filters);
+                query = $"""
+            SELECT ID, GameTypeID, MimimalParticipantsCountToStart 
+            FROM GameSessions 
+            WHERE {condition}
+        """;
+            }
+            else
+            {
+                query = "SELECT * FROM GameSessions";
+            }
+
+            GameSessions = new ObservableCollection<GameSession>(
+                _db.GameSessions.FromSqlRaw(query, parameters.ToArray())
+                    .Include(gs => gs.GameType)
+                    .ToList()
+            );
+        }
+
+
 
         public GameSessionsViewModel(INavigationService navService, CasinoContext casinoDbContext, HomeViewModel homeViewModel)
         {
             _navigation = navService;
             _db = casinoDbContext;
             Me = homeViewModel.Me;
-            
+
+            _gameTypes = _db.GameTypes.FromSql(
+                $"""
+                SELECT * FROM GameTypes
+                """).ToList();
+            _gameTypes.Add(new GameType { ID = 6, Name = "" });
+
+            FilterID = "";
+            FilterGameType = 5;
+            FilterMinimalParticipantsCountToStart = "";
+
             GameSessions = new ObservableCollection<GameSession>(
                 _db.GameSessions.FromSql(
                     $"""
-                    SELECT gs.ID, gs.MimimalParticipantsCountToStart, gt.ID AS GameTypeID, gt.Name AS GameTypeName
-                    FROM GameSessions gs
-                    JOIN GameTypes gt ON gt.ID = gs.GameTypeID
+                    SELECT * FROM GameSessions
                     """)
                 .Include(gs => gs.GameType)
                 .ToList());
@@ -157,6 +250,7 @@ namespace PskovCasino.MVVM.ViewModel
             GameSessions.CollectionChanged += GameSessions_CollectionChanged;
             ConnectCommand = new RelayCommand(Connect, canExecute => true);
             DisconnectCommand = new RelayCommand(Disconnect, canExecute => true);
+            FilterCommand = new RelayCommand(execute => Filter(), canExecute => true);
         }
     }
 }
