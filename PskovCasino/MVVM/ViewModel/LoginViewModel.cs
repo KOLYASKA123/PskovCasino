@@ -64,7 +64,7 @@ namespace PskovCasino.MVVM.ViewModel
 
         public RelayCommand LoginCommand { get; set; }
 
-        private void Login()
+        public void Login()
         {
             Me = _db.Clients.Include(c => c.ClientStatus).SingleOrDefault(c => c.Username == Username);
             if (Me != null && BCrypt.Net.BCrypt.Verify(Password, Me.Password))
@@ -73,12 +73,22 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        public void Login(CasinoContext context)
+        {
+            Me = context.Clients.Include(c => c.ClientStatus).SingleOrDefault(c => c.Username == Username);
+        }
+
         public LoginViewModel(INavigationService navService, CasinoContext casinoDbContext)
         {
             Navigation = navService;
             _db = casinoDbContext;
             NavigateRegistrationCommand = new RelayCommand(execute => Navigation.NavigateTo<RegistrationViewModel>(), canExecute => true);
             LoginCommand = new RelayCommand(execute => Login(), canExecute => true);
+        }
+
+        public LoginViewModel()
+        {
+
         }
     }
 }

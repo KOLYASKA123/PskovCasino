@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PskovCasino", "PskovCasino\PskovCasino.csproj", "{22EB6440-2722-4366-B9AF-C84694A70E96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PskovCasino", "PskovCasino\PskovCasino.csproj", "{22EB6440-2722-4366-B9AF-C84694A70E96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PskovCasino.Tests", "TestProject1\PskovCasino.Tests.csproj", "{A228C8EC-B6B6-4A12-AD72-721B6DD43963}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{22EB6440-2722-4366-B9AF-C84694A70E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22EB6440-2722-4366-B9AF-C84694A70E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22EB6440-2722-4366-B9AF-C84694A70E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A228C8EC-B6B6-4A12-AD72-721B6DD43963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A228C8EC-B6B6-4A12-AD72-721B6DD43963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A228C8EC-B6B6-4A12-AD72-721B6DD43963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A228C8EC-B6B6-4A12-AD72-721B6DD43963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

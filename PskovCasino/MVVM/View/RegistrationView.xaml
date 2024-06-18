@@ -12,7 +12,8 @@
             <Label HorizontalAlignment="Center">
                 Username
             </Label>
-            <TextBox 
+            <TextBox
+                x:Name="username"
                 Margin="10" 
                 HorizontalAlignment="Center" 
                 TextWrapping="Wrap" 
@@ -30,6 +31,7 @@
                 Password
             </Label>
             <TextBox 
+                x:Name="password"
                 Margin="10" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
@@ -45,7 +47,8 @@
             <Label HorizontalAlignment="Center">
                 Confirm password
             </Label>
-            <TextBox 
+            <TextBox
+                x:Name="retypePassword"
                 Margin="10" 
                 HorizontalAlignment="Center"  
                 VerticalAlignment="Top" 
@@ -58,7 +61,7 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <Button 
+            <Button
                 Background="Transparent" 
                 BorderBrush="Transparent" 
                 HorizontalContentAlignment="Center"
@@ -66,6 +69,7 @@
                 Command="{Binding NavigateLoginCommand}"
                 />
             <Button 
+                x:Name="register"
                 Margin="10"
                 Content="Register" 
                 HorizontalAlignment="Center" 

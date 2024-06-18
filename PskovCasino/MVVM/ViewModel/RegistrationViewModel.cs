@@ -2,12 +2,9 @@
 using PskovCasino.Core;
 using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BCrypt.Net;
+using PskovCasino;
+using Microsoft.EntityFrameworkCore.Storage;
+
 
 
 namespace PskovCasino.MVVM.ViewModel
@@ -74,7 +71,7 @@ namespace PskovCasino.MVVM.ViewModel
         public RelayCommand NavigateLoginCommand { get; set; }
         public RelayCommand RegisterCommand { get; set; }
 
-        private void RegisterNewClient()
+        public void RegisterNewClient()
         {
             if (Password == RetypePassword)
             {
@@ -92,12 +89,37 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        public void RegisterNewClient(CasinoContext context)
+        {
+            if (Password == RetypePassword)
+            {
+                Me = new()
+                {
+                    Username = Username,
+                    Password = BCrypt.Net.BCrypt.HashPassword(Password),
+                    Balance = 0,
+                    ClientStatusID = 1
+                };
+
+                context.Clients.Add(Me);
+                context.SaveChanges();
+                Me = context.Clients.Include(c => c.ClientStatus).SingleOrDefault(c => c.Username == Username);
+            }
+        }
+
+
+
         public RegistrationViewModel(INavigationService navService, CasinoContext casinoDbContext)
         {
             Navigation = navService;
             _db = casinoDbContext;
             NavigateLoginCommand = new RelayCommand(execute => Navigation.NavigateTo<LoginViewModel>(), canExecute => true);
             RegisterCommand = new RelayCommand(execute => RegisterNewClient(), canExecute => true);
+        }
+
+        public RegistrationViewModel()
+        {
+
         }
     }
 }

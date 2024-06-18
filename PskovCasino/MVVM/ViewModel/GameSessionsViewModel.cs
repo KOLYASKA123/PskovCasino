@@ -43,6 +43,12 @@ namespace PskovCasino.MVVM.ViewModel
             get => _gameTypes;
         }
 
+        private List<GameType> _gameTypesForCreating;
+        public List<GameType> GameTypesForCreating
+        {
+            get => _gameTypesForCreating;
+        }
+
         private Client _me;
         public Client Me
         {
@@ -87,6 +93,17 @@ namespace PskovCasino.MVVM.ViewModel
             }
         }
 
+        private int _selectedGameTypeForCreating;
+        public int SelectedGameTypeForCreating
+        {
+            get => _selectedGameTypeForCreating;
+            set
+            {
+                _selectedGameTypeForCreating = value;
+                OnPropertyChanged(nameof(SelectedGameTypeForCreating));
+            }
+        }
+
         private string _filterMinimalParticipantsCountToStart;
         public string FilterMinimalParticipantsCountToStart
         {
@@ -95,6 +112,17 @@ namespace PskovCasino.MVVM.ViewModel
             {
                 _filterMinimalParticipantsCountToStart = value;
                 OnPropertyChanged(nameof(FilterMinimalParticipantsCountToStart));
+            }
+        }
+
+        private string _minimalParticipantsCountToStartForCreating;
+        public string MinimalParticipantsCountToStartForCreating
+        {
+            get => _minimalParticipantsCountToStartForCreating;
+            set
+            {
+                _minimalParticipantsCountToStartForCreating = value;
+                OnPropertyChanged(nameof(MinimalParticipantsCountToStartForCreating));
             }
         }
 
@@ -203,7 +231,14 @@ namespace PskovCasino.MVVM.ViewModel
             );
         }
 
-
+        public RelayCommand CreateNewGameCommand { get; set; }
+        private void CreateNewGame()
+        {
+            _db.Database.ExecuteSql($"""
+                INSERT INTO GameSessions (GameTypeID, MimimalParticipantsCountToStart)
+                VALUES ({SelectedGameTypeForCreating + 1}, {MinimalParticipantsCountToStartForCreating})
+                """);
+        }
 
         public GameSessionsViewModel(INavigationService navService, CasinoContext casinoDbContext, HomeViewModel homeViewModel)
         {
@@ -215,11 +250,16 @@ namespace PskovCasino.MVVM.ViewModel
                 $"""
                 SELECT * FROM GameTypes
                 """).ToList();
+
+            _gameTypesForCreating = new(_gameTypes);
+
             _gameTypes.Add(new GameType { ID = 6, Name = "" });
 
             FilterID = "";
             FilterGameType = 5;
             FilterMinimalParticipantsCountToStart = "";
+
+            SelectedGameTypeForCreating = 0;
 
             GameSessions = new ObservableCollection<GameSession>(
                 _db.GameSessions.FromSql(
@@ -251,6 +291,7 @@ namespace PskovCasino.MVVM.ViewModel
             ConnectCommand = new RelayCommand(Connect, canExecute => true);
             DisconnectCommand = new RelayCommand(Disconnect, canExecute => true);
             FilterCommand = new RelayCommand(execute => Filter(), canExecute => true);
+            CreateNewGameCommand = new RelayCommand(execite => CreateNewGame(), canExecute => true);
         }
     }
 }
