@@ -14,15 +14,17 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0"  Orientation="Vertical">
             <Button 
+                x:Name="goToProfile"
                 Content="Мой профиль"
                 Command="{Binding NavigateProfileCommand}"
                 />
-            <Button 
+            <Button
+                x:Name="goToGames"
                 Content="Игровые сессии"
                 Command="{Binding NavigateGameSessionsCommand}"
                 />
         </StackPanel>
-        <ContentControl Grid.Column="1" Content="{Binding Navigation.HomeCurrentView}">
+        <ContentControl x:Name="homeContentControl" Grid.Column="1" Content="{Binding Navigation.HomeCurrentView}">
 
         </ContentControl>
     </Grid>

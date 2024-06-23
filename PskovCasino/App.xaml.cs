@@ -70,6 +70,8 @@ namespace PskovCasino
                 );
 
             _serviceProvider = services.BuildServiceProvider();
+
+            
         }
 
         protected override void OnStartup(StartupEventArgs e)

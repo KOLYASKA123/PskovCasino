@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PskovCasino.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace PskovCasino.MVVM.View
         public ProfileView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((ProfileViewModel)DataContext).Username = ((ProfileViewModel)DataContext).Me.Username;
+            ((ProfileViewModel)DataContext).Balance = ((ProfileViewModel)DataContext).Me.Balance.ToString();
+            ((ProfileViewModel)DataContext).CurrentClientStatus = ((ProfileViewModel)DataContext).Me.ClientStatusID - 1;
         }
     }
 }

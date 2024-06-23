@@ -169,6 +169,20 @@ namespace PskovCasino.MVVM.ViewModel
             _db.SaveChanges();
         }
 
+        public string Connect(CasinoContext context, int id)
+        {
+            context.GameParticipants.Add(
+                new GameParticipant
+                {
+                    ClientID = Me.ID,
+                    GameSessionID = id,
+                    InitialPayment = 0,
+                    WinPayment = 0,
+                });
+            context.SaveChanges();
+            return "OK";
+        }
+
         public RelayCommand DisconnectCommand { get; set; }
         /// <summary>
         /// Позволяет покинуть игровую сессию по ID.
@@ -186,6 +200,14 @@ namespace PskovCasino.MVVM.ViewModel
                 );
             _db.SaveChanges();
         }
+
+        public string Disconnect(CasinoContext context, GameParticipant me)
+        {
+            context.GameParticipants.Remove(me);
+            context.SaveChanges();
+            return "OK";
+        }
+
 
         public RelayCommand FilterCommand { get; set; }
         private void Filter()
@@ -238,6 +260,19 @@ namespace PskovCasino.MVVM.ViewModel
                 INSERT INTO GameSessions (GameTypeID, MimimalParticipantsCountToStart)
                 VALUES ({SelectedGameTypeForCreating + 1}, {MinimalParticipantsCountToStartForCreating})
                 """);
+            _db.SaveChanges();
+        }
+
+        public string CreateNewGame(CasinoContext context)
+        {
+            context.GameSessions.Add(
+                new GameSession
+                {
+                    GameTypeID = SelectedGameTypeForCreating + 1,
+                    MimimalParticipantsCountToStart = int.Parse(MinimalParticipantsCountToStartForCreating)
+                });
+            context.SaveChanges();
+            return "OK";
         }
 
         public GameSessionsViewModel(INavigationService navService, CasinoContext casinoDbContext, HomeViewModel homeViewModel)
@@ -292,6 +327,11 @@ namespace PskovCasino.MVVM.ViewModel
             DisconnectCommand = new RelayCommand(Disconnect, canExecute => true);
             FilterCommand = new RelayCommand(execute => Filter(), canExecute => true);
             CreateNewGameCommand = new RelayCommand(execite => CreateNewGame(), canExecute => true);
+        }
+
+        public GameSessionsViewModel()
+        {
+
         }
     }
 }

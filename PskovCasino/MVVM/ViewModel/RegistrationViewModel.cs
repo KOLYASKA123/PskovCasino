@@ -4,6 +4,7 @@ using PskovCasino.MVVM.Model;
 using PskovCasino.Services;
 using PskovCasino;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Windows;
 
 
 
@@ -75,6 +76,7 @@ namespace PskovCasino.MVVM.ViewModel
         {
             if (Password == RetypePassword)
             {
+                MessageBox.Show("Регистрируемся!");
                 Me = new()
                 {
                     Username = Username,
