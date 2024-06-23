@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="PskovCasino.App" Collapsed="true">
+    <Position X="26" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.CasinoContext">
+    <Position X="17" Y="14.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>gAAAAgIAAAAAAAAAACAIAAEAAAAAAEAAAAAAAAAAEAA=</HashCode>
+      <FileName>MVVM\Model\CasinoContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.Client">
+    <Position X="21" Y="7.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAgAAABQgAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\Model\Client.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ClientStatus" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.ClientStatus">
+    <Position X="17" Y="18" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\Model\ClientStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.ClientStatusService">
+    <Position X="20.5" Y="18" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACAACAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\Model\ClientStatusService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ClientStatus" />
+      <Property Name="Service" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.GameParticipant">
+    <Position X="15.5" Y="22.25" Width="3.5" />
+    <AssociationLine Name="Client" Type="PskovCasino.MVVM.Model.Client" ManuallyRouted="true">
+      <Path>
+        <Point X="19" Y="23.186" />
+        <Point X="25.034" Y="23.186" />
+        <Point X="25.034" Y="16.488" />
+        <Point X="22.263" Y="16.488" Type="JumpStart" />
+        <Point X="22.096" Y="16.488" Type="JumpEnd" />
+        <Point X="22" Y="16.488" />
+        <Point X="22" Y="13.227" />
+        <Point X="22.096" Y="13.227" Type="JumpStart" />
+        <Point X="22.263" Y="13.227" Type="JumpEnd" />
+        <Point X="22.359" Y="13.227" />
+        <Point X="22.359" Y="9.123" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgYAgAAAAAAIAAAAAAAAAAAAAAAAIAAAAAQ=</HashCode>
+      <FileName>MVVM\Model\GameParticipant.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+      <Property Name="GameSession" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.GameSession">
+    <Position X="17.5" Y="20" Width="4.75" />
+    <AssociationLine Name="GameType" Type="PskovCasino.MVVM.Model.GameType">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.11" Y="0.233" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAQAgAAAAAAgAAAEAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\Model\GameSession.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.GameType">
+    <Position X="10" Y="19" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\Model\GameType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.Service">
+    <Position X="22.5" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\Model\Service.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PskovCasino.MVVM.Model.Tournament">
+    <Position X="13.75" Y="19" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAgAAgAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\Model\Tournament.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameSession" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.ViewModel.GameSessionsViewModel">
+    <Position X="8.5" Y="10.5" Width="7.75" />
+    <InheritanceLine Type="PskovCasino.Core.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="27.312" Y="18.997" />
+        <Point X="27.312" Y="19.372" />
+        <Point X="25.416" Y="19.372" />
+        <Point X="25.416" Y="22.069" />
+        <Point X="25.117" Y="22.069" Type="JumpStart" />
+        <Point X="24.95" Y="22.069" Type="JumpEnd" />
+        <Point X="18.333" Y="22.069" Type="JumpStart" />
+        <Point X="18.167" Y="22.069" Type="JumpEnd" />
+        <Point X="9" Y="22.069" />
+        <Point X="9" Y="17.569" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="ConnectCommand" Type="PskovCasino.Core.RelayCommand" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9" Y="10.5" />
+        <Point X="9" Y="7.719" />
+        <Point X="15.25" Y="7.719" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="CreateNewGameCommand" Type="PskovCasino.Core.RelayCommand" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.75" Y="10.5" />
+        <Point X="9.75" Y="8.312" />
+        <Point X="15.25" Y="8.312" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="DisconnectCommand" Type="PskovCasino.Core.RelayCommand" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.75" Y="10.5" />
+        <Point X="8.75" Y="7.203" />
+        <Point X="15.25" Y="7.203" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="FilterCommand" Type="PskovCasino.Core.RelayCommand" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.312" Y="10.5" />
+        <Point X="9.312" Y="8.063" />
+        <Point X="15.25" Y="8.063" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.242" Y="0.059" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Me" Type="PskovCasino.MVVM.Model.Client" ManuallyRouted="true">
+      <Path>
+        <Point X="16.25" Y="14.348" />
+        <Point X="16.287" Y="14.348" Type="JumpStart" />
+        <Point X="16.454" Y="14.348" Type="JumpEnd" />
+        <Point X="16.502" Y="14.348" />
+        <Point X="16.502" Y="10.292" />
+        <Point X="18.104" Y="10.292" Type="JumpStart" />
+        <Point X="18.271" Y="10.292" Type="JumpEnd" />
+        <Point X="18.885" Y="10.292" Type="JumpStart" />
+        <Point X="19.052" Y="10.292" Type="JumpEnd" />
+        <Point X="20.573" Y="10.292" Type="JumpStart" />
+        <Point X="20.74" Y="10.292" Type="JumpEnd" />
+        <Point X="21.417" Y="10.292" Type="JumpStart" />
+        <Point X="21.583" Y="10.292" Type="JumpEnd" />
+        <Point X="22.096" Y="10.292" Type="JumpStart" />
+        <Point X="22.263" Y="10.292" Type="JumpEnd" />
+        <Point X="22.276" Y="10.292" Type="JumpStart" />
+        <Point X="22.443" Y="10.292" Type="JumpEnd" />
+        <Point X="22.555" Y="10.292" />
+        <Point X="22.555" Y="9.123" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Navigation" Type="PskovCasino.Services.INavigationService" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="10.75" />
+        <Point X="8.312" Y="10.75" />
+        <Point X="8.312" Y="6.546" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.432" Y="0.213" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="GameTypes" Type="PskovCasino.MVVM.Model.GameType">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.375" Y="0.583" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="GameTypesForCreating" Type="PskovCasino.MVVM.Model.GameType">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.355" Y="0.916" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AUcAwACCAAACAEARAAAMAIOSABBAIAAAAAEhAEQAQEA=</HashCode>
+      <FileName>MVVM\ViewModel\GameSessionsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ConnectCommand" />
+      <Property Name="CreateNewGameCommand" />
+      <Property Name="DisconnectCommand" />
+      <Property Name="FilterCommand" />
+      <Property Name="Me" />
+      <Property Name="Navigation" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="GameTypes" />
+      <Property Name="GameTypesForCreating" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.ViewModel.HomeViewModel">
+    <Position X="22.75" Y="10.5" Width="8" />
+    <AssociationLine Name="NavigateGameSessionsCommand" Type="PskovCasino.Core.RelayCommand" ManuallyRouted="true">
+      <Path>
+        <Point X="27.469" Y="10.5" />
+        <Point X="27.469" Y="9.673" />
+        <Point X="24.833" Y="9.673" Type="JumpStart" />
+        <Point X="24.667" Y="9.673" Type="JumpEnd" />
+        <Point X="23.413" Y="9.673" Type="JumpStart" />
+        <Point X="23.246" Y="9.673" Type="JumpEnd" />
+        <Point X="22.638" Y="9.673" Type="JumpStart" />
+        <Point X="22.471" Y="9.673" Type="JumpEnd" />
+        <Point X="22.443" Y="9.673" Type="JumpStart" />
+        <Point X="22.276" Y="9.673" Type="JumpEnd" />
+        <Point X="22.263" Y="9.673" Type="JumpStart" />
+        <Point X="22.096" Y="9.673" Type="JumpEnd" />
+        <Point X="21.583" Y="9.673" Type="JumpStart" />
+        <Point X="21.417" Y="9.673" Type="JumpEnd" />
+        <Point X="20.74" Y="9.673" Type="JumpStart" />
+        <Point X="20.573" Y="9.673" Type="JumpEnd" />
+        <Point X="19.052" Y="9.673" Type="JumpStart" />
+        <Point X="18.885" Y="9.673" Type="JumpEnd" />
+        <Point X="18.271" Y="9.673" Type="JumpStart" />
+        <Point X="18.104" Y="9.673" Type="JumpEnd" />
+        <Point X="16.25" Y="9.673" />
+        <Point X="16.25" Y="9.074" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAABAAQAAAAAAABAAABAAAAAAAAAQAA=</HashCode>
+      <FileName>MVVM\ViewModel\HomeViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NavigateGameSessionsCommand" />
+      <Property Name="NavigateProfileCommand" />
+      <Property Name="Navigation" />
+      <Property Name="Me" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.ViewModel.LoginViewModel">
+    <Position X="16.75" Y="10.5" Width="5.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAwAAAAAAQAAABAQAAAAAAAABAAAACAAIQAACAQAA=</HashCode>
+      <FileName>MVVM\ViewModel\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NavigateRegistrationCommand" />
+      <Property Name="LoginCommand" />
+      <Property Name="Navigation" />
+      <Property Name="Me" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.ViewModel.MainViewModel">
+    <Position X="25.5" Y="14.5" Width="4" />
+    <InheritanceLine Type="PskovCasino.Core.ViewModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="28.25" Y="18.438" />
+        <Point X="28.625" Y="18.438" />
+        <Point X="28.625" Y="16.559" />
+        <Point X="27.688" Y="16.559" />
+        <Point X="27.688" Y="16.184" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="Navigation" Type="PskovCasino.Services.INavigationService" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="25.5" Y="15.342" />
+        <Point X="25.333" Y="15.342" Type="JumpStart" />
+        <Point X="25.167" Y="15.342" Type="JumpEnd" />
+        <Point X="22.263" Y="15.342" Type="JumpStart" />
+        <Point X="22.096" Y="15.342" Type="JumpEnd" />
+        <Point X="22.083" Y="15.342" Type="JumpStart" />
+        <Point X="21.917" Y="15.342" Type="JumpEnd" />
+        <Point X="21.25" Y="15.342" />
+        <Point X="21.25" Y="14.5" />
+        <Point X="19.083" Y="14.5" Type="JumpStart" />
+        <Point X="18.917" Y="14.5" Type="JumpEnd" />
+        <Point X="16.37" Y="14.5" />
+        <Point X="16.37" Y="10" />
+        <Point X="9.833" Y="10" Type="JumpStart" />
+        <Point X="9.667" Y="10" Type="JumpEnd" />
+        <Point X="9.396" Y="10" Type="JumpStart" />
+        <Point X="9.229" Y="10" Type="JumpEnd" />
+        <Point X="9.083" Y="10" Type="JumpStart" />
+        <Point X="8.917" Y="10" Type="JumpEnd" />
+        <Point X="8.833" Y="10" Type="JumpStart" />
+        <Point X="8.667" Y="10" Type="JumpEnd" />
+        <Point X="8.396" Y="10" Type="JumpStart" />
+        <Point X="8.229" Y="10" Type="JumpEnd" />
+        <Point X="7.438" Y="10" />
+        <Point X="7.438" Y="6.546" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.428" Y="0.575" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAABAAAAAAAAAAAAAUAA=</HashCode>
+      <FileName>MVVM\ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NavigateHomeCommand" />
+      <Property Name="NavigateRegistrationCommand" />
+      <Property Name="Navigation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.MVVM.ViewModel.ProfileViewModel">
+    <Position X="31.5" Y="10.5" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>kAABwEAAAAAAAEABBQgAAAIAAABAAEgAAAIAAAAAQAA=</HashCode>
+      <FileName>MVVM\ViewModel\ProfileViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PskovCasino.MVVM.ViewModel.RegistrationViewModel">
+    <Position X="30" Y="16.5" Width="5.5" />
+    <InheritanceLine Type="PskovCasino.Core.ViewModel" FixedFromPoint="true">
+      <Path>
+        <Point X="28.25" Y="18.438" />
+        <Point X="28.625" Y="18.438" />
+        <Point X="28.625" Y="19.465" />
+        <Point X="29.667" Y="19.465" Type="JumpStart" />
+        <Point X="29.833" Y="19.465" Type="JumpEnd" />
+        <Point X="30" Y="19.465" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="NavigateLoginCommand" Type="PskovCasino.Core.RelayCommand" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="31.125" Y="16.5" />
+        <Point X="31.125" Y="5.159" />
+        <Point X="18.625" Y="5.159" />
+        <Point X="18.625" Y="6.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.93" Y="0.123" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="RegisterCommand" Type="PskovCasino.Core.RelayCommand" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="31.375" Y="16.5" />
+        <Point X="31.375" Y="5.057" />
+        <Point X="17.312" Y="5.057" />
+        <Point X="17.312" Y="6.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.562" Y="0.135" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAwAAAAAAAACABAQAEAAAAAABAAAiCAAIAAAAAQAA=</HashCode>
+      <FileName>MVVM\ViewModel\RegistrationViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NavigateLoginCommand" />
+      <Property Name="Navigation" />
+      <Property Name="RegisterCommand" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PskovCasino.Core.ViewModel">
+    <Position X="26.75" Y="18" Width="1.5" />
+    <InheritanceLine Type="PskovCasino.Core.ObservableObject" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="27.812" Y="21" />
+        <Point X="27.812" Y="18.997" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PskovCasino.Core.ObservableObject">
+    <Position X="25.75" Y="21" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\ObservableObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PskovCasino.Services.NavigationService">
+    <Position X="29.75" Y="21" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAACAAAAAAAAgAGAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Services\NavigationService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentView" />
+      <Property Name="HomeCurrentView" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Microsoft.EntityFrameworkCore.DbContext" Collapsed="true">
+    <Position X="22.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PskovCasino.Core.RelayCommand">
+    <Position X="15.25" Y="6.75" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="PskovCasino.Services.INavigationService">
+    <Position X="6.5" Y="5.25" Width="2.25" />
+    <AssociationLine Name="CurrentView" Type="PskovCasino.Core.ViewModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="6.546" />
+        <Point X="6.75" Y="17.688" />
+        <Point X="8.917" Y="17.688" Type="JumpStart" />
+        <Point X="9.083" Y="17.688" Type="JumpEnd" />
+        <Point X="10.917" Y="17.688" Type="JumpStart" />
+        <Point X="11.083" Y="17.688" Type="JumpEnd" />
+        <Point X="11.479" Y="17.688" Type="JumpStart" />
+        <Point X="11.646" Y="17.688" Type="JumpEnd" />
+        <Point X="22.096" Y="17.688" Type="JumpStart" />
+        <Point X="22.263" Y="17.688" Type="JumpEnd" />
+        <Point X="24.95" Y="17.688" Type="JumpStart" />
+        <Point X="25.117" Y="17.688" Type="JumpEnd" />
+        <Point X="26.375" Y="17.688" />
+        <Point X="26.375" Y="18.281" />
+        <Point X="26.75" Y="18.281" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.685" Y="0.112" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\NavigationService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentView" />
+    </ShowAsAssociation>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
